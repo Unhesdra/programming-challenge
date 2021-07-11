@@ -20,19 +20,18 @@ public final class App {
      */
     public static void main(String... args) {
 
-    	List<List<String>> records = new ArrayList<>();
-    	String fileName = "de/exxcellent/challenge/weather.csv";
-    	ReadFile readFile = new ReadFile();
-    	File file;
+    	List<List<String>> weatherRecords = new ArrayList<>();
+    	String weatherFileName = "de/exxcellent/challenge/weather.csv";
+    	ReadFile readWeatherFile = new ReadFile();
+    	File weatherFile;
 		try {
-			file = readFile.readFileFromResources(fileName);
-			records = readFile.convertCSVToList(file);
+			weatherFile = readWeatherFile.readFileFromResources(weatherFileName);
+			weatherRecords = readWeatherFile.convertCSVToList(weatherFile);
 		} catch (URISyntaxException | FileNotFoundException e) {
-			System.out.println("String could not be parsed as a URL reference!");
 			e.printStackTrace();
 		}
 		
-		readFile.getSpreadFromList(records);
+		readWeatherFile.getSpreadFromList(weatherRecords);
     	
         // Your preparation code …
 

@@ -26,7 +26,7 @@ class AppTest {
     }
     
     @Test
-    void valuesAreExtractedCorrectlyFromCSVFile() throws URISyntaxException, FileNotFoundException {
+    void valuesAreExtractedCorrectlyFromWeatherCSVFile() throws URISyntaxException, FileNotFoundException {
     	String fileName = "de/exxcellent/challenge/weather.csv";
     	ReadFile readFile = new ReadFile();
     	File file = readFile.readFileFromResources(fileName);
@@ -38,7 +38,7 @@ class AppTest {
     }
     
     @Test
-    void csvFileFromResoursesCouldNotBeFound() {
+    void weatherCSVFileFromResoursesCouldNotBeFound() {
     	String fileName = "de/exxcellent/chalenge/weather.csv";
     	ReadFile readFile = new ReadFile();
     	
