@@ -1,9 +1,16 @@
 package de.exxcellent.challenge;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Example JUnit 5 test case.
@@ -16,6 +23,26 @@ class AppTest {
     @BeforeEach
     void setUp() {
         successLabel = "successful";
+    }
+    
+    @Test
+    void valuesAreExtractedCorrectlyFromCSVFile() throws URISyntaxException, FileNotFoundException {
+    	String fileName = "de/exxcellent/challenge/weather.csv";
+    	ReadFile readFile = new ReadFile();
+    	File file = readFile.readFileFromResources(fileName);
+    	
+    	List<List<String>> records = new ArrayList<>();
+    	records = readFile.convertCSVToList(file);
+    	
+    	assertEquals(records.get(30).size(), 14);
+    }
+    
+    @Test
+    void csvFileFromResoursesCouldNotBeFound() {
+    	String fileName = "de/exxcellent/chalenge/weather.csv";
+    	ReadFile readFile = new ReadFile();
+    	
+    	assertThrows(IllegalArgumentException.class, () -> readFile.readFileFromResources(fileName));
     }
 
     @Test
