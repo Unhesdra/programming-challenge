@@ -31,14 +31,29 @@ public final class App {
 			e.printStackTrace();
 		}
 		
-		readWeatherFile.getSpreadFromList(weatherRecords);
+		String[] weatherSpreadData = readWeatherFile.getSpreadFromList(weatherRecords, "MxT", "MnT");
+		System.out.printf("The day with the smallest temperature spread was day %s with a spread of %s°C%n", weatherSpreadData[0], weatherSpreadData[1]);
+		
+		List<List<String>> footballRecords = new ArrayList<>();
+    	String footballFileName = "de/exxcellent/challenge/football.csv";
+    	ReadFile readFootballFile = new ReadFile();
+    	File footballFile;
+		try {
+			footballFile = readFootballFile.readFileFromResources(footballFileName);
+			footballRecords = readFootballFile.convertCSVToList(footballFile);
+		} catch (URISyntaxException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		String[] footballSpreadData = readWeatherFile.getSpreadFromList(footballRecords, "Goals", "Goals Allowed");
+		System.out.printf("The team with the smallest difference between Goals and Goals Allowed was %s with a spread of %s Goals%n", footballSpreadData[0], footballSpreadData[1]);
     	
         // Your preparation code …
 
-        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
-        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
-
-        String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
-        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+//        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
+//        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
+//
+//        String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
+//        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
     }
 }

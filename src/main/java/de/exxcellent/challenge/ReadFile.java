@@ -42,20 +42,25 @@ public class ReadFile {
 	    return values;
 	}
 
-	public void getSpreadFromList(List<List<String>> records) {
-		int maxTemperature = Integer.parseInt(records.get(1).get(1));
-		int minTemperature = Integer.parseInt(records.get(1).get(2));
+	public String[] getSpreadFromList(List<List<String>> records, String columnName1, String columnName2) {
+		
+		String[] minSpreadData = new String[2];
+				
+		int columnIndex1 = records.get(0).indexOf(columnName1);
+		int columnIndex2 = records.get(0).indexOf(columnName2);
+		int maxTemperature = Integer.parseInt(records.get(1).get(columnIndex1));
+		int minTemperature = Integer.parseInt(records.get(1).get(columnIndex2));
 		int minSpread = Math.abs(maxTemperature - minTemperature);
-		int dayMinSpread = 1;
 		
 		for (int i = 1; i < records.size(); i++) {			
-			maxTemperature = Integer.parseInt(records.get(i).get(1));
-			minTemperature = Integer.parseInt(records.get(i).get(2));
+			maxTemperature = Integer.parseInt(records.get(i).get(columnIndex1));
+			minTemperature = Integer.parseInt(records.get(i).get(columnIndex2));
 			if (Math.abs(maxTemperature - minTemperature) < minSpread) {
 				minSpread = Math.abs(maxTemperature - minTemperature);
-				dayMinSpread = i + 1;
+				minSpreadData[0] = records.get(i).get(0);
+				minSpreadData[1] = Integer.toString(minSpread) ;
 			}
 		}
-		System.out.printf("The day with the smallest temperature spread was day %d with a spread of %d°C%n", dayMinSpread, minSpread);
+		return minSpreadData;
 	}
 }

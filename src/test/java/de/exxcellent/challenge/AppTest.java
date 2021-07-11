@@ -44,6 +44,26 @@ class AppTest {
     	
     	assertThrows(IllegalArgumentException.class, () -> readFile.readFileFromResources(fileName));
     }
+    
+    @Test
+    void valuesAreExtractedCorrectlyFromFootballCSVFile() throws URISyntaxException, FileNotFoundException {
+    	String fileName = "de/exxcellent/challenge/football.csv";
+    	ReadFile readFile = new ReadFile();
+    	File file = readFile.readFileFromResources(fileName);
+    	
+    	List<List<String>> records = new ArrayList<>();
+    	records = readFile.convertCSVToList(file);
+    	
+    	assertEquals(records.get(20).size(), 8);
+    }
+    
+    @Test
+    void footballCSVFileFromResoursesCouldNotBeFound() {
+    	String fileName = "de/exxcellent/chalenge/football.csv";
+    	ReadFile readFile = new ReadFile();
+    	
+    	assertThrows(IllegalArgumentException.class, () -> readFile.readFileFromResources(fileName));
+    }
 
     @Test
     void aPointlessTest() {
