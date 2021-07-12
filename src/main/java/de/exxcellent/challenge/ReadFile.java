@@ -25,10 +25,16 @@ public class ReadFile {
 	 * @return file
 	 * @exception NullPointerException
 	 */
+	
+	private String fileName;
+	
+	public ReadFile(String fileName) {
+		this.fileName = fileName;
+	}
 
-	public File readFileFromResources(String fileName) {
+	public File readFileFromResources() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		URL resource = classLoader.getResource(fileName);
+		URL resource = classLoader.getResource(this.fileName);
 		File file = null;
 		
 		if(resource == null)

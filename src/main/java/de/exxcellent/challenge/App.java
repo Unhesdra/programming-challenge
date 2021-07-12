@@ -2,6 +2,7 @@ package de.exxcellent.challenge;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,13 @@ public final class App {
      * This is the main entry method of your program.
      * @param args The CLI arguments passed
      */
+	
     public static void main(String... args) {
 
     	List<List<String>> weatherRecords = new ArrayList<>();
     	String weatherFileName = "de/exxcellent/challenge/weather.csv";
-    	ReadFile readWeatherFile = new ReadFile();
-    	File weatherFile;
-    	weatherFile = readWeatherFile.readFileFromResources(weatherFileName);
+    	ReadFile readWeatherFile = new ReadFile(weatherFileName);
+    	File weatherFile = readWeatherFile.readFileFromResources();
 		weatherRecords = readWeatherFile.convertCSVToList(weatherFile);
 		
 		String[] weatherSpreadData = readWeatherFile.getSpreadFromList(weatherRecords, "MxT", "MnT");
@@ -37,14 +38,19 @@ public final class App {
 		
 		List<List<String>> footballRecords = new ArrayList<>();
     	String footballFileName = "de/exxcellent/challenge/football.csv";
-    	ReadFile readFootballFile = new ReadFile();
-    	File footballFile;
-		footballFile = readFootballFile.readFileFromResources(footballFileName);
+    	ReadFile readFootballFile = new ReadFile(footballFileName);
+    	File footballFile = readFootballFile.readFileFromResources();
 		footballRecords = readFootballFile.convertCSVToList(footballFile);
 				
 		String[] footballSpreadData = readWeatherFile.getSpreadFromList(footballRecords, "Goals", "Goals Allowed");
 		System.out.printf("The team with the smallest difference between"
 				+ " Goals and Goals Allowed was %s with a spread of %s Goals%n", footballSpreadData[0], footballSpreadData[1]);
+		
+		try {
+			new FileReader(weatherFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
     	
         // Your preparation code …
 

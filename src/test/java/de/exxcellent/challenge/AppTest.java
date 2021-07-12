@@ -28,8 +28,8 @@ class AppTest {
     @Test
     void valuesAreExtractedCorrectlyFromWeatherCSVFile() throws URISyntaxException, FileNotFoundException {
     	String fileName = "de/exxcellent/challenge/weather.csv";
-    	ReadFile readFile = new ReadFile();
-    	File file = readFile.readFileFromResources(fileName);
+    	ReadFile readFile = new ReadFile(fileName);
+    	File file = readFile.readFileFromResources();
     	
     	List<List<String>> records = new ArrayList<>();
     	records = readFile.convertCSVToList(file);
@@ -40,16 +40,16 @@ class AppTest {
     @Test
     void weatherCSVFileFromResoursesCouldNotBeFound() {
     	String fileName = "de/exxcellent/chalenge/weather.csv";
-    	ReadFile readFile = new ReadFile();
+    	ReadFile readFile = new ReadFile(fileName);
     	
-    	assertThrows(NullPointerException.class, () -> readFile.readFileFromResources(fileName));
+    	assertThrows(NullPointerException.class, () -> readFile.readFileFromResources());
     }
     
     @Test
     void valuesAreExtractedCorrectlyFromFootballCSVFile() throws URISyntaxException, FileNotFoundException {
     	String fileName = "de/exxcellent/challenge/football.csv";
-    	ReadFile readFile = new ReadFile();
-    	File file = readFile.readFileFromResources(fileName);
+    	ReadFile readFile = new ReadFile(fileName);
+    	File file = readFile.readFileFromResources();
     	
     	List<List<String>> records = new ArrayList<>();
     	records = readFile.convertCSVToList(file);
@@ -60,9 +60,9 @@ class AppTest {
     @Test
     void footballCSVFileFromResoursesCouldNotBeFound() {
     	String fileName = "de/exxcellent/chalenge/football.csv";
-    	ReadFile readFile = new ReadFile();
+    	ReadFile readFile = new ReadFile(fileName);
     	
-    	assertThrows(NullPointerException.class, () -> readFile.readFileFromResources(fileName));
+    	assertThrows(NullPointerException.class, () -> readFile.readFileFromResources());
     }
 
     @Test
