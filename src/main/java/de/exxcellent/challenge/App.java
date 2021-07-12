@@ -12,7 +12,7 @@ import java.util.List;
  * csv files, namely weather.csv and football.csv.
  * By referencing {@link ReadFile}, this class calls 3 methods to: read the file; convert the file
  * into a List; and get the minimal spread.
- * In the end this information will be output in the console.
+ * In the end this information will be printed in the console.
  *
  * @author Rafael Teixeira <teixeirarc@hotmail.com>
  * @version 0.1
@@ -26,32 +26,24 @@ public final class App {
 	
     public static void main(String... args) {
 
-    	List<List<String>> weatherRecords = new ArrayList<>();
     	String weatherFileName = "de/exxcellent/challenge/weather.csv";
-    	ReadFile readWeatherFile = new ReadFile(weatherFileName);
-    	readWeatherFile.readFileFromResources();
-		weatherRecords = readWeatherFile.convertCSVToList();
+    	String footballFileName = "de/exxcellent/challenge/football.csv";
+    	
+    	String[] weatherSpreadData = App.GetSpreadFromFile(weatherFileName, "MxT", "MnT");
+    	String[] footballSpreadData = App.GetSpreadFromFile(footballFileName, "Goals", "Goals Allowed");
 		
-		String[] weatherSpreadData = readWeatherFile.getSpreadFromList(weatherRecords, "MxT", "MnT");
 		System.out.printf("The day with the smallest temperature spread"
 				+ " was day %s with a spread of %s°C%n", weatherSpreadData[0], weatherSpreadData[1]);
 		
-		List<List<String>> footballRecords = new ArrayList<>();
-    	String footballFileName = "de/exxcellent/challenge/football.csv";
-    	ReadFile readFootballFile = new ReadFile(footballFileName);
-    	readFootballFile.readFileFromResources();
-		footballRecords = readFootballFile.convertCSVToList();
-				
-		String[] footballSpreadData = readWeatherFile.getSpreadFromList(footballRecords, "Goals", "Goals Allowed");
 		System.out.printf("The team with the smallest difference between"
-				+ " Goals and Goals Allowed was %s with a spread of %s Goals%n", footballSpreadData[0], footballSpreadData[1]);
-		    	
-        // Your preparation code …
-
-//        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
-//        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
-//
-//        String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
-//        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+				+ " Goals and Goals Allowed was %s with a spread of %s Goal(s)%n", footballSpreadData[0], footballSpreadData[1]);
+    }
+    
+    private static String[] GetSpreadFromFile(String fileName, String columnName1, String columnName2) {    	
+    	ReadFile readFile = new ReadFile(fileName);
+    	readFile.readFileFromResources();
+    	readFile.convertCSVToList();
+    	
+    	return readFile.getSpreadFromList(columnName1, columnName2);
     }
 }
