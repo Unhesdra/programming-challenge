@@ -27,25 +27,25 @@ public class ReadFile {
 	 */
 	
 	private String fileName;
+	private File file;
+	private List<List<String>> recordsFromFile = new ArrayList<>();
 	
 	public ReadFile(String fileName) {
 		this.fileName = fileName;
 	}
 
-	public File readFileFromResources() {
+	public void readFileFromResources() {
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL resource = classLoader.getResource(this.fileName);
-		File file = null;
 		
 		if(resource == null)
 			throw new NullPointerException("File path is wrong or Resource folder is empty");
 		
 		try {
-			file = new File(resource.toURI());
+			this.file = new File(resource.toURI());
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		return file;
 	}
 	
 	/**
@@ -53,17 +53,19 @@ public class ReadFile {
 	 * 
 	 * @param file
 	 * @return records
+	 * @throws  
+	 * @throws FileNotFoundException 
 	 */
 
-	public List<List<String>> convertCSVToList(File file) {
+	public List<List<String>> convertCSVToList() {
 		List<List<String>> records = new ArrayList<>();
-		try (Scanner scanner = new Scanner(file)) {
+		try (Scanner scanner = new Scanner(this.file)) {
 			while(scanner.hasNextLine()) {
 				records.add(getRecordsFromLine(scanner.nextLine()));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
+		}		
 		return records;
 	}
 

@@ -29,8 +29,8 @@ public final class App {
     	List<List<String>> weatherRecords = new ArrayList<>();
     	String weatherFileName = "de/exxcellent/challenge/weather.csv";
     	ReadFile readWeatherFile = new ReadFile(weatherFileName);
-    	File weatherFile = readWeatherFile.readFileFromResources();
-		weatherRecords = readWeatherFile.convertCSVToList(weatherFile);
+    	readWeatherFile.readFileFromResources();
+		weatherRecords = readWeatherFile.convertCSVToList();
 		
 		String[] weatherSpreadData = readWeatherFile.getSpreadFromList(weatherRecords, "MxT", "MnT");
 		System.out.printf("The day with the smallest temperature spread"
@@ -39,19 +39,13 @@ public final class App {
 		List<List<String>> footballRecords = new ArrayList<>();
     	String footballFileName = "de/exxcellent/challenge/football.csv";
     	ReadFile readFootballFile = new ReadFile(footballFileName);
-    	File footballFile = readFootballFile.readFileFromResources();
-		footballRecords = readFootballFile.convertCSVToList(footballFile);
+    	readFootballFile.readFileFromResources();
+		footballRecords = readFootballFile.convertCSVToList();
 				
 		String[] footballSpreadData = readWeatherFile.getSpreadFromList(footballRecords, "Goals", "Goals Allowed");
 		System.out.printf("The team with the smallest difference between"
 				+ " Goals and Goals Allowed was %s with a spread of %s Goals%n", footballSpreadData[0], footballSpreadData[1]);
-		
-		try {
-			new FileReader(weatherFile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-    	
+		    	
         // Your preparation code …
 
 //        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …

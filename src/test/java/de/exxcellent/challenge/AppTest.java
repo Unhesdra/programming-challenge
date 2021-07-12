@@ -29,10 +29,10 @@ class AppTest {
     void valuesAreExtractedCorrectlyFromWeatherCSVFile() throws URISyntaxException, FileNotFoundException {
     	String fileName = "de/exxcellent/challenge/weather.csv";
     	ReadFile readFile = new ReadFile(fileName);
-    	File file = readFile.readFileFromResources();
+    	readFile.readFileFromResources();
     	
     	List<List<String>> records = new ArrayList<>();
-    	records = readFile.convertCSVToList(file);
+    	records = readFile.convertCSVToList();
     	
     	assertEquals(records.get(30).size(), 14);
     }
@@ -49,10 +49,10 @@ class AppTest {
     void valuesAreExtractedCorrectlyFromFootballCSVFile() throws URISyntaxException, FileNotFoundException {
     	String fileName = "de/exxcellent/challenge/football.csv";
     	ReadFile readFile = new ReadFile(fileName);
-    	File file = readFile.readFileFromResources();
+    	readFile.readFileFromResources();
     	
     	List<List<String>> records = new ArrayList<>();
-    	records = readFile.convertCSVToList(file);
+    	records = readFile.convertCSVToList();
     	
     	assertEquals(records.get(20).size(), 8);
     }
