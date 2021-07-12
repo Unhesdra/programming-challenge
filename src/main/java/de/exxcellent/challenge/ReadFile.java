@@ -81,28 +81,27 @@ public class ReadFile {
 	 * This class returns the minimum spread between the values of two given columns. It also returns
 	 * the value of the first column for which the spread was minimum.
 	 * 
-	 * @param records
 	 * @param columnName1
 	 * @param columnName2
 	 * @return
 	 */
 
-	public String[] getSpreadFromList(List<List<String>> records, String columnName1, String columnName2) {
+	public String[] getSpreadFromList(String columnName1, String columnName2) {
 		
 		String[] minSpreadData = new String[2];
 				
-		int columnIndex1 = records.get(0).indexOf(columnName1);
-		int columnIndex2 = records.get(0).indexOf(columnName2);
-		int maxTemperature = Integer.parseInt(records.get(1).get(columnIndex1));
-		int minTemperature = Integer.parseInt(records.get(1).get(columnIndex2));
+		int columnIndex1 = this.recordsFromFile.get(0).indexOf(columnName1);
+		int columnIndex2 = this.recordsFromFile.get(0).indexOf(columnName2);
+		int maxTemperature = Integer.parseInt(this.recordsFromFile.get(1).get(columnIndex1));
+		int minTemperature = Integer.parseInt(this.recordsFromFile.get(1).get(columnIndex2));
 		int minSpread = Math.abs(maxTemperature - minTemperature);
 		
-		for (int i = 1; i < records.size(); i++) {			
-			maxTemperature = Integer.parseInt(records.get(i).get(columnIndex1));
-			minTemperature = Integer.parseInt(records.get(i).get(columnIndex2));
+		for (int i = 1; i < this.recordsFromFile.size(); i++) {			
+			maxTemperature = Integer.parseInt(this.recordsFromFile.get(i).get(columnIndex1));
+			minTemperature = Integer.parseInt(this.recordsFromFile.get(i).get(columnIndex2));
 			if (Math.abs(maxTemperature - minTemperature) < minSpread) {
 				minSpread = Math.abs(maxTemperature - minTemperature);
-				minSpreadData[0] = records.get(i).get(0);
+				minSpreadData[0] = this.recordsFromFile.get(i).get(0);
 				minSpreadData[1] = Integer.toString(minSpread) ;
 			}
 		}
