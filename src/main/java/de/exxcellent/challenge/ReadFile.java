@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *This class cointais the three methods needed to read a csv file, converting it into a List
+ *This class contains the three methods needed to read a csv file, converting it into a List
  *and finally collect the minimal spread between two given columns.
  * 
  * @author Rafael Teixeira <teixeirarc@hotmail.com>
@@ -51,22 +51,19 @@ public class ReadFile {
 	/**
 	 * This class returns a List of String List for a given csv file. 
 	 * 
-	 * @param file
 	 * @return records
-	 * @throws  
 	 * @throws FileNotFoundException 
 	 */
 
 	public List<List<String>> convertCSVToList() {
-		List<List<String>> records = new ArrayList<>();
 		try (Scanner scanner = new Scanner(this.file)) {
 			while(scanner.hasNextLine()) {
-				records.add(getRecordsFromLine(scanner.nextLine()));
+				this.recordsFromFile.add(getRecordsFromLine(scanner.nextLine()));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}		
-		return records;
+		return this.recordsFromFile;
 	}
 
 	private static List<String> getRecordsFromLine(String line) {
