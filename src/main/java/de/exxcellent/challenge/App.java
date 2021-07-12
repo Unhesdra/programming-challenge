@@ -1,18 +1,11 @@
 package de.exxcellent.challenge;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * The main class of the solution. This class outputs the minimal spread of two different
  * csv files, namely weather.csv and football.csv.
  * By referencing {@link ReadFile}, this class calls 3 methods to: read the file; convert the file
  * into a List; and get the minimal spread.
- * In the end this information will be printed in the console.
+ * In the end this information is printed in the console.
  *
  * @author Rafael Teixeira <teixeirarc@hotmail.com>
  * @version 0.1
