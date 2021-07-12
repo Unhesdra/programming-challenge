@@ -3,38 +3,29 @@ package de.exxcellent.challenge;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Example JUnit 5 test case.
+ * JUnit 5 test case.
+ * 
  * @author Rafael Teixeira <teixeirarc@hotmail.com>
  */
 class AppTest {
 
-    private String successLabel = "not successful";
-
-    @BeforeEach
-    void setUp() {
-        successLabel = "successful";
-    }
-    
     @Test
     void valuesAreExtractedCorrectlyFromWeatherCSVFile() throws URISyntaxException, FileNotFoundException {
+    	String[] spreadData = new String[2];
     	String fileName = "de/exxcellent/challenge/weather.csv";
     	ReadFile readFile = new ReadFile(fileName);
     	readFile.readFileFromResources();
+    	readFile.convertCSVToList();
+    	spreadData = readFile.getSpreadFromList("MxT", "MnT");
     	
-    	List<List<String>> records = new ArrayList<>();
-    	records = readFile.convertCSVToList();
-    	
-    	assertEquals(records.get(30).size(), 14);
+    	assertEquals(spreadData[0], "14");
+    	assertEquals(spreadData[1], "2");
     }
     
     @Test
@@ -47,14 +38,16 @@ class AppTest {
     
     @Test
     void valuesAreExtractedCorrectlyFromFootballCSVFile() throws URISyntaxException, FileNotFoundException {
+    	String[] spreadData = new String[2];
     	String fileName = "de/exxcellent/challenge/football.csv";
     	ReadFile readFile = new ReadFile(fileName);
     	readFile.readFileFromResources();
+    	readFile.convertCSVToList();
     	
-    	List<List<String>> records = new ArrayList<>();
-    	records = readFile.convertCSVToList();
+    	spreadData = readFile.getSpreadFromList("Goals", "Goals Allowed");
     	
-    	assertEquals(records.get(20).size(), 8);
+    	assertEquals(spreadData[0], "Aston_Villa");
+    	assertEquals(spreadData[1], "1");
     }
     
     @Test
@@ -64,15 +57,4 @@ class AppTest {
     	
     	assertThrows(NullPointerException.class, () -> readFile.readFileFromResources());
     }
-
-    @Test
-    void aPointlessTest() {
-        assertEquals("successful", successLabel, "My expectations were not met");
-    }
-
-    @Test
-    void runFootball() {
-        App.main("--football", "football.csv");
-    }
-
 }
