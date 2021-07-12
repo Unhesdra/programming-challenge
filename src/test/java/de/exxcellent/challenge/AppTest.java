@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Example JUnit 5 test case.
- * @author Benjamin Schmid <benjamin.schmid@exxcellent.de>
+ * @author Rafael Teixeira <teixeirarc@hotmail.com>
  */
 class AppTest {
 
@@ -42,7 +42,7 @@ class AppTest {
     	String fileName = "de/exxcellent/chalenge/weather.csv";
     	ReadFile readFile = new ReadFile();
     	
-    	assertThrows(IllegalArgumentException.class, () -> readFile.readFileFromResources(fileName));
+    	assertThrows(NullPointerException.class, () -> readFile.readFileFromResources(fileName));
     }
     
     @Test
@@ -62,7 +62,7 @@ class AppTest {
     	String fileName = "de/exxcellent/chalenge/football.csv";
     	ReadFile readFile = new ReadFile();
     	
-    	assertThrows(IllegalArgumentException.class, () -> readFile.readFileFromResources(fileName));
+    	assertThrows(NullPointerException.class, () -> readFile.readFileFromResources(fileName));
     }
 
     @Test

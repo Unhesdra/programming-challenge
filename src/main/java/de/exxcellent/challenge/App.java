@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
- * design. Read: create your own classes and packages as appropriate.
+ * The main class of the solution. This class outputs the minimal spread of two different
+ * csv files, namely weather.csv and football.csv.
+ * By referencing {@link ReadFile}, this class calls 3 methods to: read the file; convert the file
+ * into a List; and get the minimal spread.
+ * In the end this information will be output in the console.
  *
- * @author Benjamin Schmid <benjamin.schmid@exxcellent.de>
+ * @author Rafael Teixeira <teixeirarc@hotmail.com>
+ * @version 0.1
  */
 public final class App {
 
@@ -24,29 +28,23 @@ public final class App {
     	String weatherFileName = "de/exxcellent/challenge/weather.csv";
     	ReadFile readWeatherFile = new ReadFile();
     	File weatherFile;
-		try {
-			weatherFile = readWeatherFile.readFileFromResources(weatherFileName);
-			weatherRecords = readWeatherFile.convertCSVToList(weatherFile);
-		} catch (URISyntaxException | FileNotFoundException e) {
-			e.printStackTrace();
-		}
+    	weatherFile = readWeatherFile.readFileFromResources(weatherFileName);
+		weatherRecords = readWeatherFile.convertCSVToList(weatherFile);
 		
 		String[] weatherSpreadData = readWeatherFile.getSpreadFromList(weatherRecords, "MxT", "MnT");
-		System.out.printf("The day with the smallest temperature spread was day %s with a spread of %s°C%n", weatherSpreadData[0], weatherSpreadData[1]);
+		System.out.printf("The day with the smallest temperature spread"
+				+ " was day %s with a spread of %s°C%n", weatherSpreadData[0], weatherSpreadData[1]);
 		
 		List<List<String>> footballRecords = new ArrayList<>();
     	String footballFileName = "de/exxcellent/challenge/football.csv";
     	ReadFile readFootballFile = new ReadFile();
     	File footballFile;
-		try {
-			footballFile = readFootballFile.readFileFromResources(footballFileName);
-			footballRecords = readFootballFile.convertCSVToList(footballFile);
-		} catch (URISyntaxException | FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
+		footballFile = readFootballFile.readFileFromResources(footballFileName);
+		footballRecords = readFootballFile.convertCSVToList(footballFile);
+				
 		String[] footballSpreadData = readWeatherFile.getSpreadFromList(footballRecords, "Goals", "Goals Allowed");
-		System.out.printf("The team with the smallest difference between Goals and Goals Allowed was %s with a spread of %s Goals%n", footballSpreadData[0], footballSpreadData[1]);
+		System.out.printf("The team with the smallest difference between"
+				+ " Goals and Goals Allowed was %s with a spread of %s Goals%n", footballSpreadData[0], footballSpreadData[1]);
     	
         // Your preparation code …
 
